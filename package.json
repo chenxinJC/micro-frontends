@@ -7,8 +7,8 @@
     "examples:start": "npm-run-all --parallel start:*",
     "install:main": "cd app-main && yarn",
     "start:main": "cd app-main && yarn serve",
-    "install:vue2": "cd app-vue && yarn",
-    "start:vue2": "cd app-vue && yarn serve"
+    "install:vue2": "cd app-sub-vue2 && yarn",
+    "start:vue2": "cd app-sub-vue2 && yarn serve"
   },
   "repository": "https://github.com/chenxinJC/micro-frontends.git",
   "author": "chenxin <chenxin@haocang.com>",

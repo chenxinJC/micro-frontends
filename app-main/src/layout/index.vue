@@ -1,15 +1,20 @@
 <template>
-  <left-nav />
+  <app-header />
+  <app-main/>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import LeftNav from './left-nav.vue'
+import AppHeader from './app-header.vue'
+import AppMain from './app-main.vue'
 
 @Options({
   components: {
-    LeftNav
+    AppHeader,
+    AppMain
   }
 })
 export default class Home extends Vue {}
 </script>
+
+<style lang="less" scoped></style>

@@ -1,12 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    </div> -->
+    <div>vue2{{ text ? "---" + text : "" }}</div>
+    <span @click="onTest">test</span>
+    <router-view />
   </div>
 </template>
+<script>
+// import actions from "./shared/action";
+export default {
+  data() {
+    return {
+      text: "",
+    };
+  },
+  mounted() {
+    this.$onGlobalStateChange((props) => {
+      console.log("🚀 ~ 父 -> 子", props);
+      this.text = props.text;
+    });
+  },
+  methods: {
+    onTest() {
+      this.$setGlobalState({ text: "123456" });
+    },
+  },
+};
+</script>
 
 <style lang="less">
 #app {
