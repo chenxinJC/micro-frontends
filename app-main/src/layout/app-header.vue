@@ -14,6 +14,7 @@ import { Options, Vue } from 'vue-class-component'
 import { Input } from 'ant-design-vue'
 import actions from '../shared/action'
 import TopNav from './compontents/top-nav.vue'
+import shared from '../shared'
 
 @Options({
   components: {
@@ -37,7 +38,8 @@ export default class AppHeader extends Vue {
   onInput(e: any) {
     const text = e.target.value
     console.log('🚀 ~ text', text)
-    actions.setGlobalState({ text })
+    // actions.setGlobalState({ text })
+    shared.setText(text)
   }
 }
 </script>

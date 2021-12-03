@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import actions from './shared/action'
+import SharedModule from './shared'
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,8 @@ if (!window.__POWERED_BY_QIANKUN__) {
  */
 function render (props = {}) {
   const { container } = props;
+  const { shared = SharedModule.getShared() } = props;
+  SharedModule.overloadShared(shared);
   if (props) {
     // 注入 actions 实例
     actions.setActions(props);

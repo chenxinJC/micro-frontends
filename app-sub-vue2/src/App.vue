@@ -10,7 +10,8 @@
   </div>
 </template>
 <script>
-import actions from "./shared/action";
+// import actions from "./shared/action";
+import SharedModule from "./shared";
 export default {
   data() {
     return {
@@ -18,14 +19,31 @@ export default {
     };
   },
   mounted() {
-    actions.onGlobalStateChange((props) => {
-      console.log("🚀 ~ 子", props);
-      this.text = props.text;
-    });
+    // actions.onGlobalStateChange((props) => {
+    //   console.log("🚀 ~ 子", props);
+    //   this.text = props.text;
+    // });
+  },
+  computed: {
+    ptext() {
+      const text = SharedModule.text;
+      return text;
+    },
+  },
+  watch: {
+    ptext(val) {
+      console.log("🚀 ~ ptext", val);
+      this.text = val;
+    },
   },
   methods: {
     onTest() {
-      this.$setGlobalState({ text: "123456" });
+      const shared = SharedModule.getShared();
+      console.log("🚀 ~ shared", shared);
+      // 使用 shared 获取 text
+      this.text = shared.getText();
+      console.log("🚀 ~ text", this.text);
+      // this.$setGlobalState({ text: "123456" });
     },
   },
 };

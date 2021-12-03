@@ -1,28 +1,28 @@
 // micro-app-main/src/shared/store.ts
-import { createStore } from "redux";
+import { createStore } from 'redux'
 
 export type State = {
-  token?: string;
-};
+  text?: string
+}
 
 type Action = {
-  type: string;
-  payload: any;
-};
+  type: string
+  value: any
+}
 
 const reducer = (state: State = {}, action: Action): State => {
   switch (action.type) {
     default:
-      return state;
+      return state
     // 设置 Token
-    case "SET_TOKEN":
+    case 'SET_TEXT':
       return {
         ...state,
-        token: action.payload,
-      };
+        text: action.value
+      }
   }
-};
+}
 
-const store = createStore<State, Action, unknown, unknown>(reducer);
+const store = createStore<State, Action, unknown, unknown>(reducer)
 
-export default store;
+export default store
