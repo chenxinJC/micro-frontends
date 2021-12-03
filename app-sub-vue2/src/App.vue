@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-// import actions from "./shared/action";
+import actions from "./shared/action";
 export default {
   data() {
     return {
@@ -18,8 +18,8 @@ export default {
     };
   },
   mounted() {
-    this.$onGlobalStateChange((props) => {
-      console.log("🚀 ~ 父 -> 子", props);
+    actions.onGlobalStateChange((props) => {
+      console.log("🚀 ~ 子", props);
       this.text = props.text;
     });
   },

@@ -40,12 +40,9 @@ export async function mount (props) {
   Vue.prototype.$onGlobalStateChange = props.onGlobalStateChange;
   Vue.prototype.$setGlobalState = props.setGlobalState;
   props.onGlobalStateChange((state) => {
-    console.log("🚀 ~ state", state);
+    console.log("🚀 ~ main", state);
   });
-  setTimeout(() => {
-    props.setGlobalState({text: '1111'});
-    render(props);
-  }, 2000)
+  render(props);
 }
 
 export async function unmount () {
