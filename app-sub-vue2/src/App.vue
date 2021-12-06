@@ -19,6 +19,7 @@ export default {
     };
   },
   mounted() {
+    this.text = SharedModule.getShared().text;
     // actions.onGlobalStateChange((props) => {
     //   console.log("🚀 ~ 子", props);
     //   this.text = props.text;
@@ -26,8 +27,8 @@ export default {
   },
   computed: {
     ptext() {
-      const text = SharedModule.text;
-      return text;
+      const text = SharedModule.getShared().text;
+      return text || "xxx";
     },
   },
   watch: {
@@ -38,11 +39,9 @@ export default {
   },
   methods: {
     onTest() {
-      const shared = SharedModule.getShared();
-      console.log("🚀 ~ shared", shared);
+      console.log("🚀 ~ shared", SharedModule.getShared());
       // 使用 shared 获取 text
-      this.text = shared.getText();
-      console.log("🚀 ~ text", this.text);
+      console.log("🚀 ~ text", this.ptext);
       // this.$setGlobalState({ text: "123456" });
     },
   },
@@ -59,7 +58,7 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  padding: 0.4rem;
 
   a {
     font-weight: bold;

@@ -21,6 +21,7 @@ class Shared {
    */
   public setText(text: string): void {
     // 将 text 的值记录在 store 中
+    this.text = text
     store.dispatch({
       type: 'SET_TEXT',
       value: text

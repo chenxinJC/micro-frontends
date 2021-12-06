@@ -37,9 +37,9 @@ export default class AppHeader extends Vue {
 
   onInput(e: any) {
     const text = e.target.value
-    console.log('🚀 ~ text', text)
     // actions.setGlobalState({ text })
     shared.setText(text)
+    console.log('🚀 ~ shared', shared.getText())
   }
 }
 </script>
