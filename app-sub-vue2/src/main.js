@@ -1,12 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import actions from './shared/action'
+import "./public-path";
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import actions from "./shared/action";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-let instance = null
+let instance = null;
 if (!window.__POWERED_BY_QIANKUN__) {
   render()
 }
@@ -15,8 +16,9 @@ if (!window.__POWERED_BY_QIANKUN__) {
  * 渲染函数
  * 主应用生命周期钩子中运行/子应用单独启动时运行
  */
-function render (props = {}) {
+function render(props = {}) {
   const { container } = props;
+  console.log("🚀 ~ container", container);
   if (props) {
     // 注入 actions 实例
     actions.setActions(props);
@@ -24,16 +26,16 @@ function render (props = {}) {
   instance = new Vue({
     router,
     store,
-    render: h => h(App)
-  }).$mount(container ? container.querySelector('#app') : '#app');
+    render: (h) => h(App),
+  }).$mount(container ? container.querySelector("#app") : "#app");
 }
 
-export async function bootstrap () {
+export async function bootstrap() {
   console.log("vue2 app bootstraped");
 }
 
 // 从生命周期 mount 中获取通信方法，使用方式和 master 一致
-export async function mount (props) {
+export async function mount(props) {
   console.log("vue2 mount", props);
 
   // 设置通讯
@@ -43,14 +45,13 @@ export async function mount (props) {
     console.log("🚀 ~ state", state);
   });
   setTimeout(() => {
-    props.setGlobalState({text: '1111'});
+    props.setGlobalState({ text: "1111" });
     render(props);
-  }, 2000)
+  }, 100);
 }
 
-export async function unmount () {
+export async function unmount() {
   console.log("vue2 unmount");
   instance.$destroy();
   instance = null;
 }
-

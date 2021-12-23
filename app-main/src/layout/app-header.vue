@@ -4,7 +4,9 @@
       <top-nav />
     </div>
     <div class="header-other">
-      <a-input v-model:value="text" @input="onInput" style="width: 200px" />
+      <a-input v-model:value="text"
+               @input="onInput"
+               style="width: 200px" />
     </div>
   </div>
 </template>

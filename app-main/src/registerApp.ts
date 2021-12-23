@@ -28,7 +28,7 @@ export default function () {
   /**
    * Step3 设置默认进入的子应用
    */
-  setDefaultMountApp('/vue2')
+  setDefaultMountApp('/openlayers')
 
   /**
    * Step4 启动应用

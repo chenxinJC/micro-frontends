@@ -1,45 +1,46 @@
 <template>
-  <a-menu v-model:selectedKeys="current" mode="horizontal">
-    <a-menu-item key="vue2">
-      <template #icon>
-        <mail-outlined />
-      </template>
-      vue2
+  <a-menu v-model:selectedKeys="current"
+          mode="horizontal"
+          @click="handleClick">
+    <a-menu-item v-for="item in routes"
+                 :key="item.name">
+      {{item.name}}
     </a-menu-item>
-    <a-sub-menu>
-      <template #icon>
-        <setting-outlined />
-      </template>
-      <template #title>Navigation Three - Submenu</template>
-      <a-menu-item-group title="Item 1">
-        <a-menu-item key="setting:1">Option 1</a-menu-item>
-        <a-menu-item key="setting:2">Option 2</a-menu-item>
-      </a-menu-item-group>
-      <a-menu-item-group title="Item 2">
-        <a-menu-item key="setting:3">Option 3</a-menu-item>
-        <a-menu-item key="setting:4">Option 4</a-menu-item>
-      </a-menu-item-group>
-    </a-sub-menu>
   </a-menu>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch, watchEffect } from 'vue'
 import { Menu } from 'ant-design-vue'
-import { MailOutlined, SettingOutlined } from '@ant-design/icons-vue'
+import apps from '../../shared/apps'
+import { useRoute, useRouter } from 'vue-router'
+import { ObjectType } from 'qiankun'
 export default defineComponent({
   components: {
-    MailOutlined,
-    SettingOutlined,
     AMenu: Menu,
-    ASubMenu: Menu.SubMenu,
-    AMenuItem: Menu.Item,
-    AMenuItemGroup: Menu.ItemGroup
+    AMenuItem: Menu.Item
   },
   setup() {
-    const current = ref<string[]>(['vue2'])
+    const current = ref<string[]>([''])
+    const route = useRoute()
+    const routes = apps
+    const router = useRouter()
+
+    watch(
+      () => route.path,
+      (path) => {
+        current.value[0] = path.split('/')[1]
+      }
+    )
+    const handleClick = (item: ObjectType) => {
+      current.value[0] = item.key
+      router.push(`/${item.key}`)
+    }
     return {
-      current
+      current,
+      routes,
+      route,
+      handleClick
     }
   }
 })
